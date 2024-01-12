@@ -1,19 +1,82 @@
-import { Button, VerticalBox } from "std-widgets.slint";
+import { Button, VerticalBox , HorizontalBox} from "std-widgets.slint";
 
+export component WordpressBody inherits Text {
+    // width: 1.0*1px;
+    // height: 1.0*1px;
+    // spacing: 10px;
+
+    Text{
+        text: "sadfsad";
+    }
+    // Rectangle {
+    //     width: parent.width/3;
+    //     height: parent.height;
+    //     background: red;
+    //     col:0; row:0;
+    // }
+
+    // Rectangle {
+    //     width: parent.width/3;
+    //     height: parent.height;
+    //     background: blue;
+    //     col:1; row: 0;
+    // }
+
+    // Rectangle {
+    //     width: parent.width/3;
+    //     height: parent.height;
+    //     background: yellow;
+    //     col:2; row: 0;
+    // }
+}
 
 export component AppWindow inherits Window {
     in-out property<int> counter: 42;
-    callback request-increase-value();
-    VerticalBox {
-        Text {
-            text: "Counter: \{root.counter}";
+    width: 500px;
+    height: 400px;
+    background: #D8E2DC;
+    // colors: #D8E2DC, #FFFFFF, #FFCAD4
+
+    VerticalLayout {
+        HorizontalLayout {
+            alignment: space-around;
+            height: 10%;
+            Text {
+                text: "logo";
+            }
         }
-        Button {
-            text: "Increase value";
-            clicked => {
-                root.request-increase-value();
+
+        HorizontalLayout {
+            alignment: space-around;
+            height: 80%;
+            Text {
+                text: "body";
+            }
+            WordpressBody{}
+        }
+
+        HorizontalLayout {
+            alignment: space-around;
+            height: 10%;
+            Text {
+                text: "footer";
             }
         }
     }
+    
+        
+    
+    // callback request-increase-value();
+    // VerticalBox {
+    //     Text {
+    //         text: "Counter: \{root.counter}";
+    //     }
+    //     Button {
+    //         text: "Increase value";
+    //         clicked => {
+    //             root.request-increase-value();
+    //         }
+    //     }
+    // }
  }
  
