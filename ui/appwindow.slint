@@ -1,45 +1,83 @@
-import { Button, VerticalBox , HorizontalBox} from "std-widgets.slint";
+import { TextEdit, Button, VerticalBox , HorizontalBox, GridBox} from "std-widgets.slint";
 
-export component WordpressBody inherits Text {
-    // width: 1.0*1px;
-    // height: 1.0*1px;
-    // spacing: 10px;
+export component re inherits Window {
+    width: 100%;
+    height: 100%;
 
-    Text{
-        text: "sadfsad";
+    Rectangle {
+        background:red;
     }
-    // Rectangle {
-    //     width: parent.width/3;
-    //     height: parent.height;
-    //     background: red;
-    //     col:0; row:0;
-    // }
+}
 
-    // Rectangle {
-    //     width: parent.width/3;
-    //     height: parent.height;
-    //     background: blue;
-    //     col:1; row: 0;
-    // }
+export component WordpressBody inherits Window {
+    width: 100%;
+    height: 80%;
 
-    // Rectangle {
-    //     width: parent.width/3;
-    //     height: parent.height;
-    //     background: yellow;
-    //     col:2; row: 0;
-    // }
+    GridBox {
+        spacing-vertical: 10px;
+
+        // headings
+        Row {
+            Rectangle {
+                width: 30%;
+                Text {color: black; text: "Enter Email Contents Here"; }
+
+            }
+            Rectangle {
+                width: 30%;
+                Text {color: black; text: "Formatted JSON";}
+            }
+            Rectangle {
+                width: 30%;
+                Text {color: black; text: "Upload Image";}
+            }
+        }
+
+        // content bodys
+        Row {
+            Rectangle { 
+                width: 30%;
+
+                email := TextEdit {
+                    font-size: 14px;
+                    width: parent.width;
+                    height: parent.height;
+                    
+                }
+            }
+
+            Rectangle { 
+                background: blue; 
+                width: 30%;
+
+                correctJson := TextEdit {
+                    font-size: 14px;
+                    width: parent.width;
+                    height: parent.height;
+                    
+                }
+
+            }
+
+            Rectangle { 
+                background: yellow;
+                width: 30%;
+            }
+        }
+    }
 }
 
 export component AppWindow inherits Window {
-    in-out property<int> counter: 42;
     width: 500px;
     height: 400px;
     background: #D8E2DC;
+    
     // colors: #D8E2DC, #FFFFFF, #FFCAD4
 
     VerticalLayout {
         HorizontalLayout {
             alignment: space-around;
+            padding: 10px;
             height: 10%;
             Text {
                 text: "logo";
@@ -49,17 +87,20 @@ export component AppWindow inherits Window {
         HorizontalLayout {
             alignment: space-around;
             height: 80%;
-            Text {
-                text: "body";
-            }
             WordpressBody{}
         }
 
         HorizontalLayout {
-            alignment: space-around;
+            alignment: end;
+            padding: 10px;
             height: 10%;
-            Text {
-                text: "footer";
+
+            // behavior needed to "gray out" if no email content
+            Button {
+                max-height: 100%;
+                text: "Submit";
+                enabled: true;
+                primary: true;
             }
         }
     }
